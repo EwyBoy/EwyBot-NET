@@ -4,13 +4,13 @@ using Discord.WebSocket;
 
 namespace EwyBot;
 
-public class Program
+public static class Program
 {
-    public static Task Main(string[] args) => new Program().MainAsync();
+    public static Task Main(string[] args) => MainAsync();
 
-    private DiscordSocketClient _client;
+    private static DiscordSocketClient _client;
 
-    private async Task MainAsync()
+    private static async Task MainAsync()
     {
         var client = new DiscordSocketClient();
         client.MessageReceived += HandleCommandAsync;
@@ -51,13 +51,13 @@ public class Program
                 break;
             case "help":
                 SendCommandsResponse(message, 
-                    $"Hello {message.Author.Mention}! Here is a list of all commands: " 
+                    "Here is a list of all commands: " 
                     + "\n !test - test command" + " " 
                     + "\n !help - help command" + " "
                 );
                 break;
             default:
-                SendCommandsResponse(message, $"**{message.Content}** is an invalid command. Please use !help for a list of available commands.");
+                SendUnknownCommandResponse(message);
                 break;
         }
 
@@ -69,7 +69,12 @@ public class Program
         message.Channel.SendMessageAsync(response);
         Log(new LogMessage(LogSeverity.Info, "COMMAND", response));
     }
-    
+
+    private static void SendUnknownCommandResponse(SocketMessage message)
+    {
+        SendCommandsResponse(message, $"**{message.Content}** is an invalid command. Please use !help for a list of available commands.");
+    }
+
     private static Task Log(LogMessage msg)
     {
         Console.WriteLine(msg.ToString());
