@@ -1,34 +1,57 @@
 ﻿using Discord;
+using Discord.Commands;
 using Discord.WebSocket;
 using EwyBot.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace EwyBot;
 
-public static class Program
+public class Program
 {
-    public static Task Main(string[] args) => MainAsync();
-
-    private static DiscordSocketClient _client;
+    public static Task Main(string[] args) => new Program().MainAsync();
     
-    public static Task Log(LogMessage msg)
+    public async Task MainAsync()
     {
-        Console.WriteLine(msg.ToString());
-        return Task.CompletedTask;
-    }
+        using var services = ConfigureServices();
 
-    private static async Task MainAsync()
-    {
-        var client = new DiscordSocketClient();
+        var client = services.GetRequiredService<DiscordSocketClient>();
         
-        client.MessageReceived += CommandManager.HandleCommandAsync;
-        
-        client.Log += Log;
+        client.Log += LogManager.Log;
+
+        services.GetRequiredService<CommandService>().Log += Log;
         
         var secret = Environment.GetEnvironmentVariable("secret");
         
         await client.LoginAsync(TokenType.Bot, secret);
         await client.StartAsync();
+        
+        await services.GetRequiredService<CommandCenter>().InitializeAsync();
 
         await Task.Delay(-1);
     }
+    
+    public ServiceProvider ConfigureServices()
+    {
+        return new ServiceCollection()
+            .AddSingleton(new DiscordSocketClient(new DiscordSocketConfig 
+            { 
+                MessageCacheSize = 500,
+                LogLevel = LogSeverity.Info
+            }))
+            .AddSingleton(new CommandService(new CommandServiceConfig
+            { 
+                LogLevel = LogSeverity.Info,
+                DefaultRunMode = RunMode.Async,
+                CaseSensitiveCommands = false 
+            }))
+            .AddSingleton<CommandCenter>()
+            .BuildServiceProvider();
+    }
+
+    private Task Log(LogMessage log)
+    {
+        Console.WriteLine(log.ToString());
+        return Task.CompletedTask;
+    }
+    
 }
