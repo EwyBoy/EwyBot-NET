@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using EwyBot.Helpers;
 
 namespace EwyBot.Commands.Modules;
 
@@ -27,6 +28,42 @@ public class OreTweakerModule : ModuleBase<SocketCommandContext>
     public async Task Link()
     {
         await ReplyAsync("https://www.curseforge.com/minecraft/mc-mods/ore-tweaker");
+    }
+    
+    [Command("1")]
+    [Alias("1.12", "1.12.1", "1.12.2")]
+    [Summary("Info about Ore Tweaker 1")]
+    public async Task One()
+    {
+        await ReplyAsync(
+            "Ore Tweaker 1 was released " + 
+            BotHelper.GetYearsSince(new DateTime(2016, 3, 3)) +  
+            " years ago for Minecraft 1.12 and is no longer supported"
+        );
+    }
+    
+    [Command("2")]
+    [Alias("1.16", "1.16.1", "1.16.2", "1.16.3", "1.16.4", "1.16.5", "1.17", "1.17.1")]
+    [Summary("Info about Ore Tweaker 2")]
+    public async Task Two()
+    {
+        await ReplyAsync("Ore Tweaker 2 - is for released for all versions of Minecraft 1.16 and 1.17");
+    }
+    
+    [Command("3")]
+    [Alias("1.18", "1.18.1", "1.18.2")]
+    [Summary("Info about Ore Tweaker 3")]
+    public async Task Three()
+    {
+        await ReplyAsync("Ore Tweaker 3 - is for released for all versions of Minecraft 1.18");
+    }
+    
+    [Command("4")]
+    [Alias("1.19", "1.19.1", "1.19.2")]
+    [Summary("Info about Ore Tweaker 4")]
+    public async Task Four()
+    {
+        await ReplyAsync("https://github.com/EwyBoy/OreTweaker/discussions/80");
     }
     
     [Command("install")]
@@ -132,6 +169,73 @@ public class OreTweakerModule : ModuleBase<SocketCommandContext>
         
         await ReplyAsync("", false, guide.Build());
     }
+    
+    
+    [Command("tool")]
+    [Alias("tools")]
+    [Summary("Command to show the template for 1.18")]
+    public async Task Tools()
+    {
+        var guide = new EmbedBuilder();
+        
+        guide.WithTitle("Click here to download World Stripper");
+
+        guide.WithDescription(
+            "You can use World Stripper to easy locate your ores and see how they spawn.\n" + 
+            "---------------------------------------------------------------------------\n" + 
+            "1. Simply download right version of the mod by clicking the link above\n" + 
+            "2. Place the mods folder 📂\n" + 
+            "3. Launch Minecraft and open a world here you are in `Creative Mode`\n" + 
+            "4. Simply press the `DELETE` key on the keyboard ⌨️\n" +
+            "5. Watch the world get stripped away to reveal all the ore generation"
+        );
+        
+        guide.WithImageUrl("https://i.imgur.com/p5wE1QN.jpeg");
+        guide.WithUrl("https://www.curseforge.com/minecraft/mc-mods/world-stripper");
+        guide.WithFooter("https://www.curseforge.com/minecraft/mc-mods/world-stripper");
+        guide.WithColor(new Color(0, 0, 255));
+        
+        await ReplyAsync("", false, guide.Build());
+    }
+    
+    [Command("config")]
+    [Alias("cf", "configuration", "config-file")]
+    [Summary("Command to display the path to the config folder")]
+    public async Task Config()
+    {
+        var guide = new EmbedBuilder();
+        
+        guide.WithTitle("Ore Tweaker Configuration File - **oretweaker.yml**");
+
+        const string config = 
+            "#Ore Tweaker - Settings File\n" +
+            "[SETTINGS]\n" +
+            "    #Enables debug mode\n" +
+            "    debug = false\n" +
+            "\n" +
+            "[TEMPLATES]\n" +
+            "    #Attempts to generate default templates if not present\n" +
+            "    generate_templates = false\n" +
+            "    #Attempts to generate default settings if not present\n" +
+            "    generate_default_settings = false\n" +
+            "\n" +
+            "[GENERATOR]\n" +
+            "    #Attempts to auto generate deepslate variants if present\n" +
+            "    auto_generate_deepslate_variants = true\n" +
+            "    #Disables large veins from generating\n" +
+            "    disable_large_veins = true";
+
+        guide.WithDescription(
+            "```python\n"  + config  + "\n```"
+        );
+        
+        guide.WithFooter("The config folder is located in the root of your modpacks folder 📁");
+        guide.WithColor(new Color(0, 0, 255));
+        
+        await ReplyAsync("", false, guide.Build());
+    }
+
+    
     
     [Command("path")]
     [Alias("files", "folder")]
