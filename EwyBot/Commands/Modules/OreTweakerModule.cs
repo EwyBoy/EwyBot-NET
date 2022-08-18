@@ -8,17 +8,11 @@ namespace EwyBot.Commands.Modules;
 public class OreTweakerModule : ModuleBase<SocketCommandContext>
 {
 
-    [Command]
-    [Summary("Default command")]
-    public async Task OreTweaker()
-    {
-        await ReplyAsync("This is the Ore Tweaker module!");
-    }
-
     [Command("wiki")]
     [Summary("Command to get the wiki link")]
     public async Task Wiki()
     {
+    
         await ReplyAsync("https://github.com/EwyBoy/OreTweaker/wiki");
     }
 
