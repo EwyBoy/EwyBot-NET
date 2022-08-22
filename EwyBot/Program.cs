@@ -8,8 +8,13 @@ namespace EwyBot;
 
 public class Program
 {
-    public static Task Main(string[] args) => new Program().MainAsync();
     
+    public static Task Main(string[] args)
+    {
+        return new Program().MainAsync();
+    }
+
+
     public async Task MainAsync()
     {
         using var services = ConfigureServices();
@@ -29,7 +34,7 @@ public class Program
 
         await Task.Delay(-1);
     }
-    
+
     public ServiceProvider ConfigureServices()
     {
         return new ServiceCollection()
