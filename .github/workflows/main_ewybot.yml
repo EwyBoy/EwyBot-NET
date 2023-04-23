@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'EwyBot'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_354AC3CAA82D4806A4FB94D8BC78D59B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8A98F5D62F49417C8A34577C50FEE047 }}
           package: .
