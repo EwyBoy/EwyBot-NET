@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwyBot", "EwyBot\EwyBot.csproj", "{C6A8574F-D1E7-4944-97B4-4A6AEA5165DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EwyBot", "EwyBot\EwyBot.csproj", "{9939BC69-99E1-46EC-A8CF-30E04A41C3E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C6A8574F-D1E7-4944-97B4-4A6AEA5165DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6A8574F-D1E7-4944-97B4-4A6AEA5165DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6A8574F-D1E7-4944-97B4-4A6AEA5165DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6A8574F-D1E7-4944-97B4-4A6AEA5165DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9939BC69-99E1-46EC-A8CF-30E04A41C3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9939BC69-99E1-46EC-A8CF-30E04A41C3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9939BC69-99E1-46EC-A8CF-30E04A41C3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9939BC69-99E1-46EC-A8CF-30E04A41C3E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
