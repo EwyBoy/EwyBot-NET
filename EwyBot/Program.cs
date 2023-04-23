@@ -9,11 +9,10 @@ namespace EwyBot;
 public class Program
 {
     
-    public static Task Main(string[] args)
+    public static Task Main()
     {
         return new Program().MainAsync();
     }
-
 
     public async Task MainAsync()
     {

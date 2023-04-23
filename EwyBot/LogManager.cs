@@ -1,12 +1,13 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.Rest;
 using Discord.WebSocket;
 
 namespace EwyBot;
 
 public class LogManager
 {
-    public LogManager(DiscordSocketClient client, CommandService command)
+    public LogManager(BaseDiscordClient client, CommandService command)
     {
         client.Log += LogAsync;
         command.Log += LogAsync;
@@ -18,7 +19,7 @@ public class LogManager
         return Task.CompletedTask;
     }
 
-    private Task LogAsync(LogMessage message)
+    private static Task LogAsync(LogMessage message)
     {
         if (message.Exception is CommandException exception)
         {
